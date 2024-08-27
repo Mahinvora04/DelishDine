@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/restaurant.css')}}">
+<div class="patterns">
+    <svg width="100%" height="100%">
+        <style>
+            @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i");
+        </style>
+        <text x="50%" y="50%" text-anchor="middle">
+            Delish Dine
+        </text>
+    </svg>
+</div>
+<div class="page-2">
+    <div class="containerC">
+        <p>Today's mood is</p>
+        <section class="ani">
+            <div class="first">
+                <div>Pizza</div>
+            </div>
+            <div class="second">
+                <div>Dhokla</div>
+            </div>
+            <div class="third">
+                <div>Dosa</div>
+            </div>
+        </section>
+    </div>
+    <div class="discount">
+        <img src="{{url_for('static', filename='/Image/Discount.avif')}}" alt="Discount">
+    </div>
+    <div class="img-slider">
+        <div class="circular-slider">
+            <div class="container">
+                <div class="text">
+                    <h1>Apple Pie</h1>
+                    <p>
+                        Classic American pie made with tender, spiced apples baked in a flaky pastry crust.This
+                        recipe calls for
+                        eight small Granny Smith apples. Butter and flour: The filling starts with butter and
+                        all-purpose flour
+                        cooked into a paste.
+                    </p>
+                </div>
+                <div class="text">
+                    <h1>Margherita Pizza</h1>
+                    <p>
+                        Classic pizza topped with tomato sauce, mozzarella cheese, and fresh basil leaves. Freshly
+                        baked base with
+                        loads of cheese and secret sauce which overall enhances all the ingredients.
+                    </p>
+                </div>
+                <div class="text">
+                    <h1>Chole Bhature</h1>
+                    <p>
+                        Chole Bhature is a popular North Indian street food. It consists of spicy chickpeas(chole)
+                        served with
+                        deep-fried bread(Bhature). The combination offers a perfect blend of flavors and textures.
+                    </p>
+                </div>
+                <div class="text">
+                    <h1>Avial</h1>
+                    <p>
+                        It is a thick stew of usually 13 vegetables commonly found in the Western Ghats and coconut,
+                        seasoned with
+                        coconut oil and curry leaves.It is originated from Kerala.
+                    </p>
+                </div>
+                <div class="text">
+                    <h1>Idli Sambhar</h1>
+                    <p>
+                        Soft and Fluffy steamed rice cakes, Idli is a staple breakfast item in South India. Served
+                        with coconut
+                        chutney and sambhar, it provides a light and wholesome start to the day.
+                    </p>
+                </div>
+                <div class="slider">
+                    <div class="indicator"></div>
+                    <div class="menu">
+                        <div>
+                            <span>Pie</span>
+                        </div>
+                        <div>
+                            <span>Pizza</span>
+                        </div>
+                        <div>
+                            <span>Chole</span>
+                        </div>
+                        <div>
+                            <span>Avial</span>
+                        </div>
+                        <div>
+                            <span>Idli</span>
+                        </div>
+                    </div>
+                    <div class="img" onclick="redirectToRestaurantPage(this)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-3">
+    <h1 class="text-center m-5 ">Explore Takeaway Restaurants</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {% for restaurant in restaurants%}
+        <div class="col">
+            <div class="card h-100">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{url_for('static', filename='/Image/' + restaurant[1] + '.jpg')}}"
+                        class="card-img-top img-fluid" alt="Recipe Title 1">
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold" style="cursor: pointer;" data-title="{{ restaurant[1] }}"
+                        onclick="redirectToTakeAwayPage(this)">{{ restaurant[1] }}</h5>
+                    <p>{{ restaurant[2] }}</p>
+                    <p class="rounded d-inline text-white p-1 text-center" style="background-color: rgb(38, 126, 62);">
+                        {{ restaurant[3] }} <i class="fa-solid fa-star"></i></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+<div class="page-3">
+    <h1 class="text-center m-5 ">Explore Dine-in Restaurants</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {% for restaurant in booking_restaurants%}
+        <div class="col">
+            <div class="card h-100">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{url_for('static', filename='/Image/' + restaurant[1] + '.jpg')}}"
+                        class="card-img-top img-fluid" alt="Recipe Title 1">
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold" style="cursor: pointer;" data-title="{{ restaurant[1] }}"
+                        onclick="redirectToBookingRestaurantPage(this)">{{ restaurant[1] }}</h5>
+                    <p>{{ restaurant[2] }}</p>
+                    <p class="rounded d-inline text-white p-1 text-center" style="background-color: rgb(38, 126, 62);">
+                        {{ restaurant[3] }} <i class="fa-solid fa-star"></i></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

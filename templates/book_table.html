@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/reservation.css') }}">
+<style>
+    #main{
+        background-image: url("{{url_for('static', filename='/Image/' + restaurant + '.jpg')}}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<div id="main">
+
+<section class = "banner">
+        {% if reserved %}
+        <div class="alert alert-success alert-dismissible SignIn-alert w-100" style="z-index: 10;margin-top: 90px;">
+            <strong style="color: black;">Table reserved successfully!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endif %}
+    <h3 class="mt-5">BOOK YOUR TABLE NOW</h3>
+    <div class = "mx-auto card-container">
+
+        <div class = "card-content">
+            <h3>{{restaurant}}</h3>
+            <form method="post">
+                <div class = "form-row">
+                    <input type = "date" name="date" class="text-light " >
+
+                    <select name = "hours" required>
+                        <option value = "" >Select Hour</option>
+                        <option value = "10">10: 00</option>
+                        <option value = "10">12: 00</option>
+                        <option value = "10">14: 00</option>
+                        <option value = "10">16: 00</option>
+                        <option value = "10">18: 00</option>
+                        <option value = "10">20: 00</option>
+                        <option value = "10">22: 00</option>
+                    </select>
+                </div>
+
+                <div class = "form-row">
+                    <input name="fullname" type = "text" placeholder="Full Name" >
+                    <input name="phone_number" type = "text" placeholder="Phone Number" >
+                </div>
+
+                <div class = "form-row">
+                    <input name="people" type = "number" placeholder="How Many Persons?" min = "1" required>
+                    
+                </div>
+                    <button type = "submit" class = "btn btn-success" style="margin-left:35%">BOOK TABLE</button>
+
+            </form>
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}

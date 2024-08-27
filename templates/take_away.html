@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/takeaway.css')}}">
+<div>
+    <pre>
+
+
+
+
+    </pre>
+</div>
+<div class="p-1">
+
+    <div class="container">
+        <h1 class="restaurant">{{ restaurant }}</h1>
+    </div>
+    <div class="containerC">
+        <table class="table">
+            <tr class="t-row">
+                <td rowspan="2">
+                    <img src="{{url_for('static', filename='/Image/restaurant(1).avif')}}"
+                        class="dish-image-1 table-img" />
+                </td>
+                <td>
+                    <img src="{{url_for('static', filename='/Image/D5.avif')}}" class="dish-image-2 half-height-img" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{{url_for('static', filename='/Image/D7.avif')}}" class="dish-image-2 half-height-img" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Popular Dishes</h2>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for dish in dishes %}
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="dish-name w-100" onclick='toggleDescription("description_{{ dish[0] }}")'>
+                            {{ dish[1] }}
+                        </div>
+                        <div class="ratings">
+                            <div class="star-rating-container">
+                                <span class="star">&#9733;</span>
+                                <span class="rating-number">{{ dish[4] }}</span>
+                            </div>
+                        </div>
+                        <div class="description" id="description_{{ dish[0] }}">
+                            {{ dish[2] }}
+                        </div>
+                        <div class="price-and-button">
+                            <div class="price">&#8377;{{ dish[3] }}</div>
+                            {% if cart and dish[1] in cart %}
+                            <button class="add-to-cart btn-success" disabled>Added to Cart</button>
+                            {% else %}
+                            <button class="add-to-cart" onclick="addToCart('{{ dish[0] }}')"
+                                data-dish-id="{{ dish[0] }}">Add to Cart</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function toggleDescription(id) {
+            const description = document.getElementById(id);
+            description.classList.toggle("show");
+        }
+
+        function addToCart(dishId) {
+            
+            const username = document.body.getAttribute('data-user');
+            const restaurant = document.querySelector(".restaurant").innerHTML;
+
+            fetch('/add_to_cart', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'dish_id': dishId,
+                    'username': username,
+                    'restaurant': restaurant
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Added to cart successfully') {
+                        const button = document.querySelector(`button[data-dish-id="${dishId}"]`);
+                        button.textContent = 'Added to Cart';
+                        button.classList.add('btn-success');
+                        button.setAttribute('disabled', 'disabled');
+                    }
+                })
+                .catch(error => console.error('Error:', error))
+        }
+
+    </script>
+
+    {% endblock %}
+</div>

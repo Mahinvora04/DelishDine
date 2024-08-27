@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/cart.css')}}">
+<div>
+    <pre>
+
+
+
+    </pre>
+</div>
+{% if orders %}
+<div class="heading">Your Cart</div>
+<div class="shopping-cart-wrapper">
+    <table class="table is-fullwidth shopping-cart">
+        <thead>
+            <tr>
+                <th><abbr title="Position"></abbr></th>
+                <th></th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Restaurant</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item, details in orders.items() %}
+            <tr class="cart-item" id="{{ item }}">
+                <td> <input type="checkbox" class="cart-item-check" checked=""> </td>
+                <td class="dish" data-dish="{{ item }}"> {{ item }} </td>
+                <td>&#8377; {{ details[0] }}</td>
+                <td> <input class="input is-primary cart-item-qty" id="cart-item-qty" style="width:100px" type="number"
+                        min="1" data-restaurant="{{ details[1] }}" data-price="{{ details[0] }}" data-dish="{{ item }}"
+                        data-prev-qty="1" value="{{ details[2] }}" onchange="updateUI(this)">
+                </td>
+                <td class="restaurant" data-restaurant="{{ details[1] }}">{{ details[1] }}</td>
+                <td class="cart-item-total-{{ item.replace(' ','') }}">&#8377; {{ details[0]*details[2] }} </td>
+                <td> <a class="button is-small" onclick="removeItem(this)" data-dish="{{ item }}"
+                        data-restaurant="{{ details[1] }}" style="text-decoration:none; color:#952323">Remove</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="totals">
+        <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">&#8377; {{ total_price }}</div>
+        </div>
+        <div class="totals-item">
+            <label>Tax (5%)</label>
+            <div class="totals-value" id="cart-tax">&#8377; {{ tax }}</div>
+        </div>
+        <div class="totals-item">
+            <label>Shipping</label>
+            <div class="totals-value" id="cart-shipping">&#8377; 15</div>
+        </div>
+        <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">&#8377; {{ taxPrice }}</div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button class="checkout" onclick="clearCart()">Clear</button>
+        <button class="checkout" onclick="window.location.href=`/bill/${document.body.getAttribute('data-user')}`">Checkout</button>
+    </div>
+</div>
+{% else %}
+<div class="cart-container">
+    <h1 class="cart-h1">Your Cart is Empty</h1>
+    <p class="cart-p">Add some delicious items to your cart!</p>
+    <a href="{{url_for('restaurant',username =username)}}" id="cart-btn"
+        class="btn">Browse Menu</a>
+</div>
+{% endif %}
+<script>
+    function removeItem(item) {
+        var username = document.body.getAttribute("data-user")
+        var dish = item.getAttribute("data-dish")
+        var restaurant = item.getAttribute("data-restaurant")
+        document.getElementById(dish).remove()
+
+        fetch(`/remove_item/${username}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "username": username, "dish": dish, "restaurant": restaurant })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+    }
+    function clearCart() {
+        var username = document.body.getAttribute("data-user")
+
+        fetch(`/clear_cart`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "username": username })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+    }
+    function updateUI(cartQty) {
+        var restaurant = cartQty.getAttribute("data-restaurant")
+        var dish = cartQty.getAttribute("data-dish")
+        var username = document.body.getAttribute("data-user")
+        var subtotal = document.getElementById("cart-subtotal")
+        var carttotal = document.getElementById("cart-total")
+        var cartItemTotal = document.querySelector(".cart-item-total-" + dish.replace(" ", ""))
+        var carttax = document.getElementById("cart-tax")
+        var price = cartQty.getAttribute("data-price")
+        var prevQty = cartQty.getAttribute("data-prev-qty")
+        var newQty = cartQty.value
+
+        var qtyDifference = parseInt(newQty) - parseInt(prevQty)
+        var totalPrice = parseFloat(subtotal.innerHTML.split(" ")[1])
+        var tax = (totalPrice * 0.5).toFixed(2)
+        carttax.innerHTML = "&#8377 " + tax
+        cartItemTotal.innerHTML = "&#8377 " + (parseInt(newQty) * parseFloat(price)).toFixed(2)
+
+        if (qtyDifference > 0) {
+            totalPrice += (price * qtyDifference)
+        } else if (qtyDifference < 0) {
+            totalPrice -= (-price * qtyDifference)
+        }
+
+        subtotal.innerHTML = "&#8377 " + totalPrice.toFixed(2)
+
+        var taxTotalPrice = totalPrice + (totalPrice * 0.5) + 15
+        carttotal.innerHTML = "&#8377 " + taxTotalPrice.toFixed(2)
+
+        cartQty.setAttribute("data-prev-qty", newQty)
+
+        var data = {
+            "username": username,
+            "dish": dish,
+            "restaurant": restaurant,
+            "quantity": newQty
+        };
+
+        fetch(`/add_to_cart/${username}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Optionally handle response data
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error);
+            });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/restaurant.css')}}">
+<div>
+    <pre>
+
+
+
+
+    </pre>
+</div>
+<div class="page-3">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{url_for('static', filename='/Image/R1.jpg')}}" class="d-block w-100" alt="...">
+    
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Culinary Canvas Café</h1>
+                    <p class="carousel-des">Culinary Canvas Café is a whimsical eatery where food becomes art. Every dish is meticulously crafted to resemble a masterpiece on a plate. From edible sculptures to painterly presentations, diners are invited to indulge their senses in a culinary journey like no other. </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{url_for('static', filename='/Image/R2.jpg')}}" class="d-block w-100" alt="...">
+    
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Sizzle & Swirl Steakhouse</h1>
+                    <p class="carousel-des">Sizzle & Swirl Steakhouse is a carnivore's paradise, specializing in premium cuts of meat grilled to perfection. Located in the heart of the city, this upscale steakhouse offers a sophisticated ambiance with a modern twist. </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!-- <img src="/static/Image/R3.jpg" class="d-block w-100" alt="..."> -->
+                <img src="{{url_for('static', filename='/Image/R3.jpg')}}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Mystic Breeze Bistro</h1>
+                    <p class="carousel-des">Nestled in a quaint corner of town, Mystic Breeze Bistro is a charming escape where flavors from around the world mingle harmoniously. Drawing inspiration from global cuisines and local ingredients, the menu at this cozy bistro is a fusion of culinary traditions.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <h1 class="text-center m-5 ">Explore Restaurants</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {% for restaurant in restaurants%}
+        <div class="col">
+            <div class="card h-100">
+                <div class="bg-image hover-overlay ripple">
+                    <img src="{{url_for('static', filename='/Image/' + restaurant[1] + '.jpg')}}"
+                        class="card-img-top img-fluid" alt="Recipe Title 1">
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold" style="cursor: pointer;" onclick="redirectToTakeAwayPage(this)" data-title="{{ restaurant[1] }}">{{ restaurant[1] }}</h5>
+                    <p>{{ restaurant[2] }}</p>
+                    <p class="rounded d-inline text-white p-1 text-center" style="background-color: rgb(38, 126, 62);">
+                        {{ restaurant[3] }} <i class="fa-solid fa-star"></i></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</div>

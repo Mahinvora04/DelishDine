@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/user_profile.css')}}">
+<div>
+  <pre>
+
+
+
+
+  </pre>
+</div>
+
+<div class="container-xl px-4 mt-4">
+  <nav class="nav nav-borders">
+    <a class="nav-link active ms-0" href="#">Profile</a>
+    <a class="nav-link  ms-0" href="{{url_for('bookings',username = username)}}">Bookings</a>
+  </nav>
+  <hr class="mt-0 mb-4" />
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Profile Picture</div>
+        <div class="card-body text-center">
+          <img class="img-account-profile rounded-circle mb-2"
+            src="{{url_for('static', filename='/Image/profile_icon.png')}}" alt>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="card mb-4">
+        <div class="card-header">Account Details</div>
+        <div class="card-body">
+          <form action="{{ url_for('profile', username=username) }}" method="POST">
+            <div class="mb-3">
+              <label class="small mb-1" for="inputUsername">Username</label>
+              <input class="form-control" id="inputUsername" name="username" type="text"
+                placeholder="Enter your username" value="{{ profile[1] }}" disabled />
+            </div>
+
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label class="small mb-1" for="inputFirstName">First name</label>
+                <input class="form-control" id="inputFirstName" name="first_name" type="text"
+                  placeholder="Enter your first name" value="{{ profile[5].split()[0] }}" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="small mb-1" for="inputLastName">Last name</label>
+                <input class="form-control" id="inputLastName" name="last_name" type="text"
+                  placeholder="Enter your last name" value="{{ profile[5].split()[1] }}" />
+              </div>
+            </div>
+
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label class="small mb-1" for="inputPhone">Phone number</label>
+                <input class="form-control" id="inputPhone" name="phone" type="tel"
+                  placeholder="Enter your phone number" value="{{ profile[6] }}" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                <input class="form-control" id="inputEmailAddress" name="email" type="email"
+                  placeholder="Enter your email address" value="{{ profile[3] }}" />
+              </div>
+            </div>
+
+            <div class="password-change-section">
+              <h2>Password Change</h2>
+              <div class="mb-3">
+                <label class="small mb-1" for="inputOldPassword">Old Password</label>
+                <input class="form-control" id="inputOldPassword" name="old_password" type="password"
+                  placeholder="Enter your old password" />
+              </div>
+              <div class="mb-3">
+                <label class="small mb-1" for="inputNewPassword">New Password</label>
+                <input class="form-control" id="inputNewPassword" name="new_password" type="password"
+                  placeholder="Enter your new password" />
+              </div>
+            </div>
+            <input type="submit" class="btn btn-outline-success" value="Save changes">
+            <input type="button" class="btn btn-outline-success float-end" value="Logout" onclick="window.location.href='/'">
+          </form>
+          <br>
+          {% if alert %}
+          <div class="alert alert-{{alert_type}} alert-dismissible fade show" role="alert">
+            {{ alert }}
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

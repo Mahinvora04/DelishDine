@@ -1,0 +1,334 @@
+.table > tbody > tr > .no-line {
+  border-top: none;
+}
+
+.table > thead > tr > .no-line {
+  border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+  border-top: 2px solid;
+}
+
+.panel-body {
+  position: relative;
+}
+
+.frame {
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 400px;
+  margin: 0 auto;
+  border: 2px #fbfbfb solid;
+  position: relative;
+  box-shadow: inset 0 0 0 20px white;
+  background: url(https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80)
+    no-repeat center;
+  background-size: cover;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Cairo");
+
+/* Define animation properties for default size */
+/* Define animation properties for default size */
+.invoice-title .horder {
+  background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+  background-size: cover;
+  color: transparent;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: 120px; /* Default font size */
+  margin: 10px 0;
+}
+
+/* Media query for small-sized screens */
+@media screen and (max-width: 768px) {
+  .invoice-title .horder {
+    font-size: 60px; /* Decrease font size for small-sized screens */
+  }
+  .body {
+    font-size: 20px; /* Decrease font size for small-sized screens */
+  }
+  .col-xs-6 {
+    width: 100%; /* Make the columns full width */
+    float: none; /* Remove floating */
+    clear: both; /* Clear floats */
+  }
+
+  .row {
+    display: flex; /* Use flexbox for the row */
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  .col-xs-6 {
+    width: auto; /* Reset the width */
+  }
+}
+
+/* Media query for medium-sized screens */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .invoice-title .horder {
+    font-size: 100px; /* Decrease font size for medium-sized screens */
+  }
+  .body {
+    font-size: 22px; /* Decrease font size for medium-sized screens */
+  }
+}
+
+/* Media query for large-sized screens */
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+  .invoice-title .horder {
+    font-size: 110px; /* Decrease font size for large-sized screens */
+  }
+  .body {
+    font-size: 24px; /* Decrease font size for large-sized screens */
+  }
+}
+
+.Goodbye {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f2e8c6; /* Semi-transparent background */
+  display: none; /* Initially hide the animation */
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it appears above other content */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.5s ease; /* Add transition for smooth opacity change */
+}
+
+.animate-goodbye {
+  animation: animateGoodbye 5s ease forwards; /* Run the animation for 5 seconds */
+}
+
+@keyframes animateGoodbye {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container1 .box {
+  transform-style: preserve-3d;
+  animation: animate 7s ease-in-out infinite alternate;
+}
+
+.container1 .box span {
+  /* background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5) 90%, transparent); */
+  text-transform: uppercase;
+  line-height: 0.76em;
+  position: absolute;
+  color: #fff;
+  font-size: 3em;
+  white-space: nowrap;
+  font-weight: bold;
+  padding: 0px 10px;
+  transform-style: preserve-3d;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%) rotateX(calc(var(--i) * 22.5deg))
+    translateZ(109px);
+}
+
+.container1 .box span i {
+  font-style: initial;
+}
+
+.container1 .box span i:nth-child(1) {
+  color: #d5b0f3;
+}
+
+.container1 .box span i:nth-child(2) {
+  color: #952323;
+}
+
+/* Media queries for responsive font size */
+@media screen and (max-width: 768px) {
+  .container1 .box span {
+    font-size: 2.3em; /* Decrease font size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container1 .box span {
+    font-size: 1.5em; /* Further decrease font size for even smaller screens */
+  }
+}
+
+@media screen and (max-width: 385px) {
+  .container1 .box span {
+    font-size: 1em; /* Further decrease font size for even smaller screens */
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: perspective(500px) rotateX(0deg) rotate(5deg);
+  }
+  100% {
+    transform: perspective(50px) rotateX(360deg) rotate(5deg);
+  }
+}
+
+.custom-border {
+  place-content: center;
+  border-radius: 10px;
+  --border-angle: 0turn;
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    #f2e8c6 50%,
+    #952323
+  ); /* Peach shades */
+  border: solid 5px transparent;
+  border-radius: 2em;
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #f2e8c6 50%,
+    #952323
+  ); /* Peach shades */
+  background: var(--main-bg) padding-box, var(--gradient-border) border-box,
+    var(--main-bg) border-box;
+  background-position: center center;
+  animation: bg-spin 3s linear infinite;
+}
+
+#confirm-order-btn {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px 40px; /* Adjust the padding to increase button size */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px; /* Adjust the font size to increase button size */
+  margin: 10px; /* Add some margin for spacing */
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#confirm-order-btn:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.title {
+  font-family: "Cairo";
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  line-height: 2;
+  background-color: #f2e8c6;
+  border-radius: 50px; /* Adjust the value to change the roundness */
+}
+
+.panel-title {
+  font-size: 30px; /* Adjust the font size as needed */
+}
+
+.horder {
+  background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+  background-size: cover;
+  color: transparent;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: 120px;
+  margin: 10px 0;
+}
+
+.panel {
+  border: 2px solid #000; /* Add a black border around invoice title and panel */
+  border-radius: 10px; /* Optional: Add border radius for a rounded appearance */
+  margin-top: 20px; /* Optional: Add some margin for spacing */
+}
+
+.panel-heading {
+  background-color: #f5f5f5; /* Optional: Add a background color for panel heading */
+}
+
+.body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+.gradient-background,
+.overlay-image {
+  position: fixed; /* Fix both the gradient and the overlay image */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure they are behind the content */
+}
+
+.gradient-background {
+  background: linear-gradient(-45deg, #f2e8c6, #952323);
+  background-size: 800% 800%; /* Increase the background size */
+  animation: gradient 15s ease infinite;
+  opacity: 0.8; /* Adjust the opacity of the gradient background */
+}
+
+.overlay-image {
+  background-size: cover;
+  opacity: 0.5; /* Adjust the opacity of the image */
+}
+
+.content {
+  position: relative; /* Set the content position back to relative */
+  z-index: 1; /* Ensure the content stays above the gradient and the image */
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

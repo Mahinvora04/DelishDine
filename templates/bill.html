@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='/css/bill.css')}}">
+</head>
+
+<body class="body" data-user="{{ username }}">
+  <div class="gradient-background"></div>
+  <img class="overlay-image" src="{{url_for('static', filename='/Image/Gbg1.jpg')}}" alt="Overlay Image">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="invoice-title custom-border">
+          <div class="title">
+            <div class="horder">YOUR ORDER</div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <address>
+          <strong>Billed To:</strong><br>
+          {{ username }}<br>
+
+        </address>
+      </div>
+      <div class="col-md-6">
+        <div><strong>Order Date:</strong><br><span id="order-date"></span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Order summary</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="frame"></div>
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <td><strong>Dish Name</strong></td>
+                    <td class="text-center"><strong>Price</strong></td>
+                    <td class="text-center"><strong>Restaurant</strong></td>
+                    <td class="text-center"><strong>Quantity</strong></td>
+                    <td class="text-right"><strong>Totals</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item,details in orders.items() %}
+                  <tr>
+                    <td>{{ item }}</td>
+                    <td class="text-center">&#8377;{{ details[0] }}</td>
+                    <td class="text-center">{{ details[1] }}</td>
+                    <td class="text-center">{{ details[2] }}</td>
+                    <td class="text-right">&#8377;{{ details[0]*details[2] }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td class="thick-line"></td>
+                    <td class="thick-line"></td>
+                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                    <td class="thick-line text-right" id="subtotal">&#8377;{{ subtotal }}</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line" colspan="2"></td>
+                    <td class="no-line text-center"><strong>Tax (5%)</strong></td>
+                    <td class="no-line text-right" id="tax-amount"></td>
+                  </tr>
+                  <tr>
+                    <td class="no-line" colspan="2"></td>
+                    <td class="no-line text-center"><strong>Shipping</strong></td>
+                    <td class="no-line text-right" id="tax-amount">₹15</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line" colspan="2"></td>
+                    <td class="no-line text-center"><strong>Total</strong></td>
+                    <td class="no-line text-right" id="total-amount"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="confirm-order-btn" onclick="clearCart()">Confirm Order</button>
+
+    <div class='Goodbye' id="goodbye">
+      <div class="container1">
+        <div class="box">
+          <span style="--i: 1">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 2">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 3">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 4">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 5">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 6">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 7">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 8">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 9">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 10">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 11">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 12">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 13">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 14">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 15">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+          <span style="--i: 16">
+            <i>Thank You</i>
+            Visit
+            <i>Again</i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      function clearCart() {
+        var username = document.body.getAttribute("data-user")
+        fetch(`/clear_cart/${username}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ "username": username })
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log(data); // Optionally handle response data
+          })
+          .catch(error => {
+            console.error("There was a problem with the fetch operation:", error);
+          });
+      }
+      function getCurrentDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var yyyy = today.getFullYear();
+
+        return yyyy + '-' + mm + '-' + dd;
+      }
+
+      document.getElementById("order-date").textContent = getCurrentDate();
+
+      window.onload = function () {
+        var subtotal = parseInt(document.getElementById("subtotal").innerHTML.split("₹")[1])
+        var taxRate = 0.5;
+        var taxAmount = subtotal * taxRate;
+        var totalAmount = subtotal + taxAmount + 15;
+
+        document.getElementById("tax-amount").textContent = '₹' + taxAmount.toFixed(2);
+        document.getElementById("total-amount").textContent = '₹' + totalAmount.toFixed(2);
+
+      };
+
+      // Get the elements
+      const confirmOrderButton = document.getElementById('confirm-order-btn');
+      const goodbyeElement = document.getElementById('goodbye');
+
+      // Add event listener to the confirm order button
+      confirmOrderButton.addEventListener('click', () => {
+        startAnimation();
+      });
+
+      // Function to start the animation
+      function startAnimation() {
+        // Display the goodbye animation
+        goodbyeElement.style.display = 'flex';
+        // Add the animation class
+        goodbyeElement.classList.add('animate-goodbye');
+
+        // Stop the animation after 15 seconds
+        setTimeout(() => {
+          stopAnimation();
+        }, 15000); // 15 seconds in milliseconds
+      }
+
+      // Function to stop the animation
+      function stopAnimation() {
+        goodbyeElement.classList.remove('animate-goodbye');
+        goodbyeElement.style.display = 'none';
+        window.location.href = `/home/${document.body.getAttribute("data-user")}`
+      }
+
+    </script>
+
+</body>
+
+</html>

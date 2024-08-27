@@ -1,0 +1,145 @@
+body {
+  background-color: #f2e8c6;
+}
+h1,
+h2 {
+  text-align: center;
+  padding: 20px;
+  margin: 0px;
+}
+h2 {
+  padding: 0px;
+  padding-bottom: 10px;
+  border: none;
+}
+h1:hover {
+  color: #952323;
+  font-size: 35px;
+}
+.container {
+  padding: 10px;
+  /* border: 2px solid black; */
+
+}
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  
+}
+.card:hover {
+  height: auto;
+}
+.card-content {
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  
+}
+.card:hover .card-content {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.dish-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.dish-name:hover {
+  color: #b80000;
+  font-size: 22px;
+}
+.description {
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+  padding-right: 140px;
+  text-align: justify;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+.description.show {
+  opacity: 1;
+  height: auto;
+}
+.price-and-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.price:hover {
+  transform: scale(1.1);
+}
+.add-to-cart {
+  background-color: #e36414;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+.add-to-cart:hover {
+  transform: scale(1.1);
+  background-color: #9a031e;
+}
+.table {
+  margin-bottom: 40px;
+  margin-top: 0px;
+}
+.dish-image-1 {
+  width: 61vw;
+  height: 35vw;
+}
+.dish-image-2 {
+  width: 33vw;
+  height: 17vw;
+}
+.price:hover {
+  color: brown;
+}
+
+.star-rating-container {
+  background-color: #28a745;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  display: inline-block;
+}
+
+.star {
+  color: gold;
+  margin-right: 0.2em;
+}
+
+.rating-number {
+  color: white;
+}
+
+.p-1{
+  height: auto; /* Change height to auto */
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.containerC{
+  height: auto; /* Change height to auto */
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 2px !important;
+  overflow: hidden;
+}
